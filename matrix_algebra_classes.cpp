@@ -1,0 +1,89 @@
+#include<iostream>
+using namespace std;
+class matrix
+	{
+	int a[2][2],b[2][2];
+	public:
+		void input();
+		void sum();
+		void sub();
+		void mul();
+	};
+	void matrix::input()
+	{
+		int i,j;
+		cout<<"Enter first matrix"<<endl;
+		for(i=0;i<=1;i++)
+		{ 
+		for(j=0;j<=1;j++)
+		{
+		cout<<"Enter "<<i<<j<<endl;
+		cin>>a[i][j];
+		}
+		}
+		cout<<"Enter second matrix"<<endl;
+		for(i=0;i<=1;++i)
+		{ for(j=0;j<=1;++j)
+		{
+		cout<<"Enter "<<i<<j<<endl;
+		cin>>b[i][j];}
+	}
+	}
+	void matrix::sum()
+	{
+		int temp[2][2];
+		int i,j;
+		for(i=0;i<=1;i++)
+		{ for(j=0;j<=1;j++)
+			temp[i][j]=a[i][j]+b[i][j];}
+			cout<<"Addition of matrices is "<<endl;
+		for(i=0;i<=1;++i)
+		{ for(j=0;j<=1;++j)
+			cout<<temp[i][j]<<endl;
+		}
+	}
+	void matrix::sub()
+	{
+		int m[2][2];
+		int i,j;
+		for(i=0;i<=1;++i)
+		{ for(j=0;j<=1;++j)	
+			m[i][j]=a[i][j]-b[i][j];}
+			cout<<"Subtraction of matrices is"<<endl;
+			for(i=0;i<=1;++i)
+			{ for(j=0;j<=1;++j)
+			cout<<m[i][j]<<endl;
+		}
+	}
+	void matrix::mul()
+	{
+		int i,j,k;
+		int t[2][2];
+		for(i=0;i<=1;++i)
+		{
+			for(j=0;j<=1;++j)
+			{
+			t[i][j]=0;
+			for(k=0;k<=1;++k)
+			{
+				t[i][j]+=a[i][k]*b[k][j];
+			}
+		}
+	}
+	cout<<"The multiplication matrices is"<<endl;
+	for(i=0;i<=1;++i)
+	{
+		for(j=0;j<=1;++j)
+		{cout<<t[i][j]<<endl;}
+	}
+}
+ 	int main()
+ 	{
+ 		matrix mobj;
+ 		mobj.input();
+ 		mobj.sum();
+ 		mobj.sub();
+ 		mobj.mul();
+ 		return 0;
+ 	}
+
