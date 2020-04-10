@@ -58,8 +58,13 @@ T Queue<T>::dequeue()
 template<class T>
 void Queue<T>::display()
 {
-	for(int i = front+1 ; i<=rear;i++)
+	int i = front+1;
+	
+	do
+	{
 		cout<<Q[i]<<endl;
+		i = (i+1)%size;
+	}while(i!=(rear+1)%size);	
 }
 
 int main()
