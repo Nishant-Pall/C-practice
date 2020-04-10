@@ -59,7 +59,10 @@ template<class T>
 void Queue<T>::display()
 {
 	int i = front+1;
-	
+	/*
+		Used do while because we need to print the last element too, if we used a while loop
+		it wouldn't print the last element.
+	*/
 	do
 	{
 		cout<<Q[i]<<endl;
