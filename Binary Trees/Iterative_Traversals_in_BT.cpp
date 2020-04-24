@@ -107,26 +107,26 @@ void Tree::Inorder(Node *p)
 void Tree::Postorder(Node *p)
 {
 	long int temp;
-	stack<Node*> st;
+	stack<long int> st;
 	while(p || !st.empty())
 	{
 		if(p)
 		{
-			st.push(p);
+			st.push((long int)p);
 			p=p->lchild;
 		}
 		else
 		{
-			temp=(long int)st.top();
+			temp=st.top();
 			st.pop();
 			if(temp>0)
 			{
-				st.push((Node*)-temp);
+				st.push(-temp);
 				p=((Node*)temp)->rchild;
 			}
 			else
 			{
-				cout<<((Node*)temp)->data;
+				cout<<((Node*)(-1*temp))->data;
 				p=NULL;
 			}
 		}
