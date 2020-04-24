@@ -1,8 +1,6 @@
 #include<iostream>
 #include<queue>
 #include<stack>
-#include<stdint.h>
-#include "util.h"
 using namespace std;
 
 class Node

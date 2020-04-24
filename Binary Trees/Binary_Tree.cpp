@@ -60,7 +60,14 @@ class Tree
 		 void Levelorder(){Levelorder(root);} //Calling the function below passing root as parameter
 		 void Levelorder(Node *p);
 		 int Height(){return Height(root);} //Calling the function below passing root as parameter
-		 int Height(Node *root);
+		 int Height(Node *p);
+		 int Count(){return Count(root);}
+		 int Count(Node*p);
+		 int CountDegree2(){return CountDegree2(root);}
+		 int CountDegree2(Node*p);
+		 int Sum(){return Sum(root);}
+		 int Sum(Node *p);
+		 
 };
 void Tree::CreateTree()
 {
@@ -145,13 +152,49 @@ void Tree::Levelorder(struct Node *p)
 		 }
 	 }
 }
-int Tree::Height(struct Node *root)
+int Tree::Count(Node *p)
 {
-
+	int x,y;
+	if(p)
+	{
+		x = Count(p->lchild);
+		y = Count(p->rchild);
+		return x+y+1;
+	}
+	return 0;
+}
+int Tree::CountDegree2(Node *p)
+{
+	int x,y;
+	if(p)
+	{
+		x = CountDegree2(p->lchild);
+		y = CountDegree2(p->rchild);
+		if(p->lchild&&p->rchild)
+			return x+y+1;
+		else
+			return 0;
+	}
+	return 0;
+}
+int Tree::Sum(Node *p)
+{
+	int x,y;
+	if(p)
+	{
+		x = Sum(p->lchild);
+		y = Sum(p->rchild);
+		return x+y+p->data;
+	}
+	return 0;
+}
+int Tree::Height(struct Node *p)
+{
 	 int x=0,y=0;
-	 if(root==0)
+	 if(p==0)
 		 return 0;
-	 x=Height(root->lchild); y=Height(root->rchild);
+	 x=Height(p->lchild);
+	 y=Height(p->rchild);
 	 if(x>y)
 		 return x+1;
 	 else
@@ -167,5 +210,9 @@ int main()
 	 cout<<"Inorder ";
 	 t.Inorder();
 	 cout<<endl<<endl;
+	 cout<<"Height of Binary Tree:"<<t.Height()<<endl;
+	 cout<<"Sum of all elements:"<<t.Sum()<<endl;
+	 cout<<"Number of Nodes:"<<t.Count()<<endl;
+	 cout<<"Number of Nodes with Degree 2:"<<t.CountDegree2()<<endl;
  return 0;
 }
