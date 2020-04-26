@@ -1,4 +1,6 @@
 #include <iostream>
+#include<stack>
+#include<queue>
 using namespace std;
 
 class Node
@@ -8,43 +10,6 @@ class Node
  		int data;
  		Node *rchild;
 };
-class Queue 
-{
-	private:
-		 int front;
-		 int rear;
-		 int size;
-		 Node **Q;
-	public:
-		 Queue(){front=rear=-1;size=10;Q=new Node*[size];}
-		 Queue(int size){front=rear=-1;this->size=size;;Q=new
-			Node*[size];}
- 		 void enqueue(Node *x);
- 		 Node *dequeue();
-		 int isEmpty(){ return front==rear;}
-};
-void Queue::enqueue(Node *x)
-{
-	 if(rear==size-1)
- 		printf("Queue Full\n");
- 	 else
- 	{
- 		rear++;
- 		Q[rear]=x;
- 	}
-}
-Node *Queue::dequeue()
-{
-	 Node *x=NULL;
-	 if(front==rear)
-		 printf("Queue is Empty\n");
-	 else
-	 {
-		 x=Q[front+1];
-		 front++;
-	 }
- 	 return x;
-}
 class Tree
 {
 	 Node *root;          //Keeping it private so no one can change the root of the tree
@@ -59,6 +24,7 @@ class Tree
 		 void Inorder(Node *p);
 		 void Levelorder(){Levelorder(root);} //Calling the function below passing root as parameter
 		 void Levelorder(Node *p);
+		 Node* Search(int key);
 		 int Height(){return Height(root);} //Calling the function below passing root as parameter
 		 int Height(Node *p);
 		 int Count(){return Count(root);}
@@ -73,25 +39,26 @@ void Tree::CreateTree()
 {
 	 Node *p,*t=NULL;
 	 int x;
-	 Queue q;
+	 queue<Node*> q;
 	 printf("Enter root value :");
 	 scanf("%d",&x);
 	 root=new Node; 
 	 root->data=x;
 	 root->lchild=root->rchild=NULL;
-	 q.enqueue(root);        //adding root address to the queue
-	 while(!q.isEmpty())
+	 q.push(root);        //adding root address to the queue
+	 while(!q.empty())
 	 {
-		 p=q.dequeue();           //extracts the first element in the queue and assigns it to p
+		 p=q.front();
+		 q.pop();           //extracts the first element in the queue and assigns it to p
 		 printf("enter left child of %d :",p->data);
 		 scanf("%d",&x);
  		if(x!=-1)				//check if node has left child or not
  		{
- 			t=new Node;
+ 			 t=new Node;
 			 t->data=x;
 			 t->lchild=t->rchild=NULL;     
 			 p->lchild=t;		//making parent point on it
-			 q.enqueue(t);		//adding the address to queue
+			 q.push(t);		//adding the address to queue
 		}
 		 printf("enter right child of %d :",p->data);
 		 scanf("%d",&x);
@@ -101,9 +68,23 @@ void Tree::CreateTree()
 			 t->data=x;
 			 t->lchild=t->rchild=NULL;
 			 p->rchild=t;
-			 q.enqueue(t);
+			 q.push(t);
 		 }
 	 }
+}
+Node* Tree::Search(int key)
+{
+	Node *p = root;
+	while(p)
+	{
+		if(key==p->data);
+			return p;
+		if(key > p->data)
+			p=p->rchild;
+		else
+			p=p->lchild;
+	}
+	return NULL;
 }
 void Tree::Preorder(struct Node *p)
 {
@@ -134,21 +115,22 @@ void Tree::Postorder(struct Node *p)
 }
 void Tree::Levelorder(struct Node *root)
  {
-	 Queue q;
+	 queue<Node*> q;
 	 printf("%d ",root->data);
-	 q.enqueue(root);
-	 while(!q.isEmpty())
+	 q.push(root);
+	 while(!q.empty())
 	 {
-		 root=q.dequeue();
+		 root=q.front();
+		 q.pop();
 		 if(root->lchild)
 		 {
 			 printf("%d ",root->lchild->data);
-			 q.enqueue(root->lchild);
+			 q.push(root->lchild);
 		 }
 		 if(root->rchild)
 		 {
 			 printf("%d ",root->rchild->data);
-			 q.enqueue(root->rchild);
+			 q.push(root->rchild);
 		 }
 	 }
 }
@@ -202,17 +184,15 @@ int Tree::Height(struct Node *p)
 }
 int main() 
 {
-	 Tree t;
-	 t.CreateTree();
-	 cout<<"Preorder ";
-	 t.Preorder();
-	 cout<<endl;
-	 cout<<"Inorder ";
-	 t.Inorder();
-	 cout<<endl<<endl;
-	 cout<<"Height of Binary Tree:"<<t.Height()<<endl;
-	 cout<<"Sum of all elements:"<<t.Sum()<<endl;
-	 cout<<"Number of Nodes:"<<t.Count()<<endl;
-	 cout<<"Number of Nodes with Degree 2:"<<t.CountDegree2()<<endl;
- return 0;
+	int key;
+	Tree t;
+	t.CreateTree();
+	cout<<endl<<endl;
+	cout<<"Enter Key to search:";
+	cin>>key;
+	if(t.Search(key))
+	 	cout<<"Key Found";
+	else
+		cout<<"Not Found";
+ 	return 0;
 }
