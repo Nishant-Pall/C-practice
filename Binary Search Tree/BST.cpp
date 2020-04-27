@@ -24,7 +24,9 @@ class Tree
 		 void Inorder(Node *p);
 		 void Levelorder(){Levelorder(root);} //Calling the function below passing root as parameter
 		 void Levelorder(Node *p);
-		 Node* Search(int key);
+		 Node* Search(int key){return Search(root,key);}
+		 Node* Search(Node* p, int key);
+		 void Insert(int key);
 		 int Height(){return Height(root);} //Calling the function below passing root as parameter
 		 int Height(Node *p);
 		 int Count(){return Count(root);}
@@ -72,12 +74,11 @@ void Tree::CreateTree()
 		 }
 	 }
 }
-Node* Tree::Search(int key)
+Node* Tree::Search(Node* p,int key)
 {
-	Node *p = root;
 	while(p)
 	{
-		if(key==p->data);
+		if(key==p->data)
 			return p;
 		if(key > p->data)
 			p=p->rchild;
@@ -85,6 +86,28 @@ Node* Tree::Search(int key)
 			p=p->lchild;
 	}
 	return NULL;
+}
+void Tree::Insert(int key)
+{
+	Node* r = NULL;		  // tailing pointer
+	Node* t = root;		 // searching pointer
+	Node* p = new Node;  // for inserting new node
+	while(t)
+	{
+		r = t;
+		if(key==t->data)
+			return;
+		else if(key > t->data)
+			t = t->rchild;
+		else
+			t = t->lchild;
+	}
+	p->data = key;
+	p->lchild = p->rchild = NULL;
+	if(p->data < r->data)
+		r->lchild = p;
+	else
+		r->rchild = p;	
 }
 void Tree::Preorder(struct Node *p)
 {
@@ -184,15 +207,22 @@ int Tree::Height(struct Node *p)
 }
 int main() 
 {
+	Node* temp;
 	int key;
 	Tree t;
 	t.CreateTree();
 	cout<<endl<<endl;
+	t.Inorder();
+	cout<<endl;
 	cout<<"Enter Key to search:";
 	cin>>key;
-	if(t.Search(key))
-	 	cout<<"Key Found";
+	temp = t.Search(key);
+	if(temp)
+	 	cout<<"Key Found:"<<temp->data;
 	else
 		cout<<"Not Found";
+	cout<<endl;
+	t.Insert(key);
+	t.Inorder();
  	return 0;
 }
