@@ -26,6 +26,8 @@ class Tree
 		 void Levelorder(Node *p);
 		 Node* Search(int key){return Search(root,key);}
 		 Node* Search(Node* p, int key);
+		 Node* RecursiveInsert(int key){return RecursiveInsert(root,key);}
+		 Node*RecursiveInsert(Node* p, int key);
 		 void Insert(int key);
 		 int Height(){return Height(root);} //Calling the function below passing root as parameter
 		 int Height(Node *p);
@@ -86,6 +88,21 @@ Node* Tree::Search(Node* p,int key)
 			p=p->lchild;
 	}
 	return NULL;
+}
+Node* Tree::RecursiveInsert(Node* p, int key)
+{
+	Node* t;
+	if(p==NULL)
+	{
+		t = new Node;
+		t->data = key;
+		t->lchild = t->rchild = NULL;
+	}
+	if(key<p->data)
+		p->lchild = RecursiveInsert(p->lchild, key);
+	else if(key>p->data)
+		p->rchild = RecursiveInsert(p->rchild, key);
+	return t;
 }
 void Tree::Insert(int key)
 {
@@ -222,6 +239,7 @@ int main()
 	else
 		cout<<"Not Found";
 	cout<<endl;
+	cout<<"Inserting key";
 	t.Insert(key);
 	t.Inorder();
  	return 0;
