@@ -27,7 +27,13 @@ class Tree
 		 Node* Search(int key){return Search(root,key);}
 		 Node* Search(Node* p, int key);
 		 Node* RecursiveInsert(int key){return RecursiveInsert(root,key);}
-		 Node*RecursiveInsert(Node* p, int key);
+		 Node* RecursiveInsert(Node* p, int key);
+		 Node* Delete(int key){return Delete(root, key);}
+		 Node* Delete(Node* p, int key);
+		 Node* InPre(){return InPre(root);}
+		 Node* InPre(Node* p);
+		 Node* InSucc(){return InSucc(root);}
+		 Node* InSucc(Node* p);
 		 void Insert(int key);
 		 int Height(){return Height(root);} //Calling the function below passing root as parameter
 		 int Height(Node *p);
@@ -126,6 +132,38 @@ void Tree::Insert(int key)
 	else
 		r->rchild = p;	
 }
+Node* Tree::Delete(Node* p,int key)
+{
+	Node* q;
+	if(p==NULL)
+		return NULL;
+	if(p->rchild==NULL && p->lchild==NULL)
+	{
+		if(p==root)
+			root=NULL;
+		delete p;
+		return NULL;
+	}
+	if(key<p->data)
+		p->lchild = Delete(p->lchild, key);
+	else if(key > p->data)	
+		p->rchild = Delete(p->rchild, key);
+	else
+	{
+		if(Height(p->lchild) > Height(p->rchild))
+		{
+			q = InPre(p->lchild);
+			p->data = q->data;
+			p->lchild = Delete(p->lchild, q->data);
+		}
+		else
+		{
+			q = InSucc(p->rchild);
+			p->data = q->data;
+			p->rchild = Delete(p->rchild, q->data);
+		}
+	}
+}
 void Tree::Preorder(struct Node *p)
 {
 	 if(p)
@@ -221,6 +259,18 @@ int Tree::Height(struct Node *p)
 		 return x+1;
 	 else
 		 return y+1;
+}
+Node* Tree::InPre(Node*p)
+{
+	while(p && p->lchild)
+		p = p->lchild;
+	return p;
+}
+Node* Tree::InSucc(Node*p)
+{
+	while(p && p->rchild)
+		p = p->rchild;
+	return p;
 }
 int main() 
 {
