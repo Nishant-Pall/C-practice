@@ -26,14 +26,14 @@ int Delete(int A[],int n)
 		 j=j+1;						// bring j to the greater child
 		 if(A[i]<A[j])
 		 {
-			 temp=A[i];   //
-			 A[i]=A[j];   //	SWAP OF ELEMENTS
-			 A[j]=temp;   //
+			 temp=A[i];   //	SWAP
+			 A[i]=A[j];   //	 OF 
+			 A[j]=temp;   //	ELEMENTS
 			 i=j;  		  // Bring i to the child
 			 j=2*j;		  // Bring j to it's left child
 		 }
 		 else
-		 break;
+			 break;
 	 }
  return val;
 }
