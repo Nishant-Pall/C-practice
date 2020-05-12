@@ -16,8 +16,8 @@ void BubbleSort(int A[], int n)
 				temp = A[j];
 				A[j] = A[j+1];
 				A[j+1] = temp;	
+				flag = 1;				// assign flag as 1 to indicate that swap took place
 			}
-			flag = 1;				// assign flag as 1 to indicate that swap took place
 		}
 		if(flag==0) break;
 	}
@@ -25,7 +25,7 @@ void BubbleSort(int A[], int n)
 
 int main()
 {
-	int A[] = {10,30,400,70,20,50,60};
+	int A[] = {10,30,40,70,20,50,60};
 	
 	BubbleSort(A, 7);
 	
