@@ -12,7 +12,7 @@ int Merge(int A[], int B[], int m, int n)
 	{
 		if(A[i] < B[j])
 			C[k++] = A[i++];
-		if(B[j] < A[i])
+		else
 			C[k++] = B[j++];		
 	}
 	for(;i<m;i++)			// for loop if some elements remaining in A
