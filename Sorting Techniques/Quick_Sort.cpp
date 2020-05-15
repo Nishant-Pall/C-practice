@@ -36,7 +36,7 @@ void QuickSort(int A[],int l,int h)
 }
 int main()
 {
- int A[]={11,13,7,12,16,9,24,5,10,3},n=10,i;
+ int A[]={11,13,7,12,16,9,24,5,10,3,INT_MAX},n=10,i;
 
  QuickSort(A,0,n);
 
