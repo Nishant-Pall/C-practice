@@ -1,11 +1,8 @@
 #include<iostream>
 using namespace std;
 
-void MergeSingleList(int A[],int n)
+void Merge(int A[],int l,int mid, int h)
 {
-	int l=A[0];
-	int h=A[n];
-	int mid=A[n/2];
 	int i,j,k;
 	i=l;
 	j=mid+1;
@@ -26,11 +23,23 @@ void MergeSingleList(int A[],int n)
 	for(i=l;i<=h;i++)
 		A[i]=B[i];
 }
+void IMergeSort(int A[], int n)
+{
+	int p,i,l,mid,h;
+	for(p=2;p<=n;p=p*2)
+	{
+		for(i=0;i+p-1<n;i=i+p)
+		{
+			l = i;
+			h = i+p-1;
+			mid = (l+h)/2;
+			Merge(A,l,mid,h);
+		}
+	}
+	if(p/2 < n)	Merge(A,0,p/2,n-1);
+}
 int main()
 {
-	int A[] = {2,5,8,12,3,6,7,10};
-	MergeSingleList(A,8);
-	for(int i = 0; i<8;i++)
-		cout<<A[i]<<endl;
+
 	return 0;
 }
