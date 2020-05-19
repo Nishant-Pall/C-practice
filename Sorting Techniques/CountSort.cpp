@@ -3,7 +3,7 @@ using namespace std;
 
 int FindMax(int A[],int n)
 {
-	int max = -32578;
+	int max = INT_MIN;
 	for(int i = 0; i<n; i++)
 	{
 		if(A[i] > max)
