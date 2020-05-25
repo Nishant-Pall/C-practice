@@ -16,7 +16,7 @@ int main()
 	 int i;
 
 	 for(i=0;i<10;i++)
-	 HT[i]=NULL;
+		 HT[i]=NULL;
 	
 	 Insert(HT,12);
 	 Insert(HT,22);
