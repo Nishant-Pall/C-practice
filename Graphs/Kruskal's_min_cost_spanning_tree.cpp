@@ -53,7 +53,6 @@ int main(){
 			 t[0][i]=u;t[1][i]=v;
 			 join(find(u),find(v));
 			 i++;
- // printf("%d %d %d %d\n",u,v,find(u),find(v));
  		 }
  		 included[k]=1;
 	 }
