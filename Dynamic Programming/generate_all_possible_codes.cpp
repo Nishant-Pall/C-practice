@@ -23,12 +23,12 @@ int getCodes(string input, string output[10000]) {
         return 1;
     }
     string result1[10000],result2[10000];
-    int size2;
+    int size2=0;
 
     int size1=getCodes(input.substr(1),result1);
     if(input.size()>1)
     {
-        if(atoi(input[0])*10+atoi(input[1])>10&&atoi(input[0])*10+atoi(input[1])<27)
+        if(atoi(input[0])*10+atoi(input[1])>=10&&atoi(input[0])*10+atoi(input[1])<27)
         {
             size2=getCodes(input.substr(2),result2);
         }
