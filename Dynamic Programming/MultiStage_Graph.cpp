@@ -30,7 +30,7 @@ int main()
 	Path[1] = 1;
 	Path[stages] = n;
 	for(int i=2; i<stages;i++)
-		Path[i] = Path[d[i-1]];
+		Path[i] = d[Path[i-1]];
 	
 	cout<<"The path is:";
 	for(int i=1; i<=stages; i++)
