@@ -68,15 +68,15 @@ class matrix
 				{
 					t[i][j]+=a[i][k]*b[k][j];
 				}
-			}
-		}
-		cout<<"The multiplication matrices is"<<endl;
-		for(i=0;i<=1;++i)
-		{
-			for(j=0;j<=1;++j)
-			{cout<<t[i][j]<<endl;}
 		}
 	}
+	cout<<"The multiplication matrices is"<<endl;
+	for(i=0;i<=1;++i)
+	{
+		for(j=0;j<=1;++j)
+		{cout<<t[i][j]<<endl;}
+	}
+}
  	int main()
  	{
  		matrix mobj;

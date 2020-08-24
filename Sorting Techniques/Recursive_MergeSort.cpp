@@ -8,27 +8,25 @@ void Merge(int A[],int l,int mid, int h)
 	j=mid+1;
 	k=l;
 	int B[h+1];
-	while(i<=mid && j<=h)
-	{
+	while(i<=mid && j<=h) {
 		if(A[i] < A[j])
 			B[k++]=A[i++];
 		else
 			B[k++]=A[j++];
 	}
-	for(;i<=mid;i++)
+	for(; i<=mid; i++)
 		B[k++]=A[i];
-	for(;j<=h;j++)
+	for(; j<=h; j++)
 		B[k++]=A[j];
-		
-	for(i=l;i<=h;i++)
+
+	for(i=l; i<=h; i++)
 		A[i]=B[i];
 }
 void RMergeSort(int A[], int l,int h)
 {
 	int mid;
-	if(l<h)
-	{
-		mid = (l+h)/2;
+	if(l<h) {
+		mid = l + (h-l)/2;
 		RMergeSort(A,l,mid);
 		RMergeSort(A,mid+1,h);
 		Merge(A,l,mid,h);
@@ -36,9 +34,9 @@ void RMergeSort(int A[], int l,int h)
 }
 int main()
 {
-	int A[]={8,3,7,4,9,2,6,5};
+	int A[]= {8,3,7,4,9,2,6,5};
 	RMergeSort(A,0,7);
-	for(int i=0;i<8;i++)
+	for(int i=0; i<8; i++)
 		cout<<A[i]<<endl;
 	return 0;
 }
